@@ -1,4 +1,4 @@
-@echo off
+@echo off 
 title=NetKeeper-WiFi
 ::
 ::设置参数
@@ -7,7 +7,7 @@ SET netkeeper="D:\Program Files\NetKeeper\NetKeeper.exe"
 SET nkTask="NK.exe"
 SET wifi="D:\Program Files (x86)\kingsoft\kwifi\kwifi.exe"
 SET wifiTask="kwifi.exe"
-SET log="%net.log%"
+SET log="ping.log"
 
 :: 获取管理员身份
 echo Obtaining administrator identity ...
@@ -30,22 +30,24 @@ del tmp.log
 
 :: 判断是否连接网络
 if defined r ( 
+echo; >> %log%
 echo Network is not connected >> %log%
-
+echo;
 echo Start the network connection ...
 
 ::关闭wifi进程
 echo close the wifi task ...
-taskkill /f /t /im %wifiTask%
+echo close the wifi task ... >> %log%
+taskkill /f /t /im %wifiTask% >> %log%
 
-echo Successfully turned off the WiFi or WiFi did not start ... >> %log%
 
 :: 启动netkeeper
 echo;
 echo start NetKeeper ...
-start "" %netkeeper%
+echo; >> %log%
+echo start NetKeeper ... >> %log%
+start "" %netkeeper% >> %log%
 
-echo Successfully started NetKeeper ... >> %log%
 
 :: 等待连接
 echo;
@@ -56,17 +58,18 @@ timeout /t 30
 :: 关闭NK进程
 echo;
 echo close the task ...
-taskkill /f /t /im %nkTask%
-
-echo Successfully turned off the task ... >> %log%
+echo; >> %log%
+echo close the task ... >> %log%
+taskkill /f /t /im %nkTask% >> %log%
 
 :: 启动wifi
 echo;
 echo start kwifi ...
-start "" %wifi%
+echo; >> %log%
+echo start kwifi ... >> %log%
+start "" %wifi% >> %log%
 
-echo Successfully started WiFi ... >> %log%
-
+echo; >> %log%
 echo All tasks are completed ... >> %log%
 
 :: 执行完成 关闭窗口
@@ -87,5 +90,5 @@ echo;
 timeout /t 5
 
 )
-
+echo; >> %log%
 echo See you ... >> %log%
