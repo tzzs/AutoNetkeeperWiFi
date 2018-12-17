@@ -36,7 +36,9 @@ echo;
 echo Start the network connection ...
 
 ::关闭wifi进程
+echo;
 echo close the wifi task ...
+echo; >> %log%
 echo close the wifi task ... >> %log%
 taskkill /f /t /im %wifiTask% >> %log%
 
