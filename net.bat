@@ -33,6 +33,8 @@ if defined r (
 echo; >> %log%
 echo Network is not connected >> %log%
 echo;
+echo Network is not connected
+echo;
 echo Start the network connection ...
 
 ::关闭wifi进程
